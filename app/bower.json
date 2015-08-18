@@ -1,0 +1,9 @@
+{
+  "name": "ratchetphp-angular-test",
+  "private": "true",
+  "dependencies": {
+    "angular": "1.4.4",
+    "angular-material": "0.10.1",
+    "angular-ui-router": "~0.2.15"
+  }
+}
