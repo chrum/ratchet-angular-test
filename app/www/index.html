@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Ratchet (socketo.me) - Angular test app</title>
+    <link href="css/styles.css" rel="stylesheet"/>
 
     <script src="js/libs.js"></script>
     <script src="js/templates.js"></script>
+
     <script src="js/scripts.js"></script>
 </head>
 <body>
-    <div class="view-container">
-        <div ng-view class="view-frame"></div>
+    <div class="container">
+        <ui-view></ui-view>
     </div>
 </body>
 </html>

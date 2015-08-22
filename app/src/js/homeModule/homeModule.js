@@ -1,3 +1,10 @@
-/**
- * Created by chrystian on 8/18/15.
- */
+angular
+.module('homeModule', ['ui.router'])
+.config(['$stateProvider', function ($stateProvider) {
+    $stateProvider
+        .state('home', {
+            url: '/home',
+            templateUrl: 'homeModule/homePage.html',
+            controller: 'homeCtrl'
+        })
+}]);

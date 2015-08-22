@@ -1,10 +1,11 @@
 angular
 .module('testApp', [
     'ui.router',
+    'ngMaterial',
+    'templatesModule',
     'userModule',
-    // 'homeModule'
+    'homeModule'
 ])
-.config()
 .run([
     '$rootScope', '$location', '$state', '$timeout',
 function ($rootScope, $location, $state, $timeout) {

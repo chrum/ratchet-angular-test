@@ -11,7 +11,7 @@ var webpackConfig = require('./webpack.config.js');
 var webpackLibsConfig = require('./webpack.libs.config.js');
 
 var paths = {
-  sass: ['./src/scss/ionic.app.scss'],
+  sass: ['./src/scss/styles.scss'],
   sources_js: ['./src/js/app.js', './src/js/**/*.js'],
   libs_js: ['./src/libs/index.js', './src/libs/**/*.js'],
   sources_html: ['./src/js/**/templates/*.html']
