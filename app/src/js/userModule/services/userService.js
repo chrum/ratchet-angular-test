@@ -2,8 +2,10 @@ angular
 .module('userModule')
 .factory('userService', [
     '$rootScope',
+    'socket',
 function (
-    $rootScope
+    $rootScope,
+    socket
 ) {
     var userService = {
         data: {
@@ -16,6 +18,12 @@ function (
 
         getUsername: function () {
             return this.data.username;
+        },
+
+        isUsernameFree: function (name) {
+            socket.emit('checkUsername', name, function () {
+
+            });
         },
 
         init: function () {

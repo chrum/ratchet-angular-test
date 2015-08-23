@@ -61,6 +61,7 @@ gulp.task('scripts', function () {
     // .pipe(jshint(''))
     // .pipe(jshint.reporter('default'))
           .pipe($.sourcemaps.init())
+          .pipe($.babel())
           .pipe($.concat('scripts.js'))
           .pipe($.sourcemaps.write())
           .pipe(gulp.dest('www/js'))

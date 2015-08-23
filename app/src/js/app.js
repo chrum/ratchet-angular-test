@@ -4,12 +4,13 @@ angular
     'ngMaterial',
     'templatesModule',
     'userModule',
-    'homeModule'
+    'homeModule',
+    'socketsModule'
 ])
 .run([
     '$rootScope', '$location', '$state', '$timeout',
 function ($rootScope, $location, $state, $timeout) {
     $timeout(function () {
-        $state.go('login')
-    })
+        $state.go('login');
+    });
 }]);

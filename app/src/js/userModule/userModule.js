@@ -6,5 +6,5 @@ angular
             url: '/login',
             templateUrl: 'userModule/loginPage.html',
             controller: 'loginCtrl'
-        })
+        });
 }]);

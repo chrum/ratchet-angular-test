@@ -26,7 +26,11 @@ function (
         } else if ($scope.data.name.length < 3) {
             alert('Nickname should be min 3 characters long');
             return false;
+        } else if (!userService.isUsernameFree($scope.data.name)) {
+            alert('Username taken, please choose different name');
+            return false;
         }
+
 
         return true;
     }

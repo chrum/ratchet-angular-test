@@ -12,7 +12,8 @@ use testApp\testApp;
 
     $server = IoServer::factory(
         new testApp(),
-        8080
+        8008,
+        '0.0.0.0'
     );
 
     $server->run();
