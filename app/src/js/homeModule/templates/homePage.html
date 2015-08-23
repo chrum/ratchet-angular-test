@@ -4,14 +4,28 @@
             ng-click="toggleLeftMenu()">
             <i class="material-icons">menu</i>
         </md-button>
-        <span>Toolbar with Icon Buttons</span>
+        <span>Hello in this simple chat...</span>
     </div>
 </md-toolbar>
 <section layout="row">
+
     <md-sidenav md-component-id="left" class="md-sidenav-left">
-        Left Nav!
+        <md-button href="#/login">Change username</md-button>
     </md-sidenav>
+
     <md-content>
-        Center Content
+        <md-list>
+            <md-list-item class="md-2-line" ng-repeat="message in messages">
+                <div class="md-list-item-text">
+                    <strong>{{message.name}}: </strong>{{message.text}}
+                </div>
+            </md-list-item>
+        </md-list>
+
+        <md-input-container>
+            <input ng-model="data.currentMessage"/>
+        </md-input-container>
+        <md-button
+                ng-click="sendMessage()">Send message</md-button>
     </md-content>
 </section>
