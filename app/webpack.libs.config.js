@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 module.exports = {
     cache: true,
-    // devtool: 'source-map',
+    devtool: 'source-map',
     entry: './src/libs/libs.js',
     output: {
         path: 'www/js',

@@ -20,8 +20,17 @@ function (
             return this.data.username;
         },
 
-        isUsernameFree: function (name) {
-            socket.emit('checkUsername', name, function () {
+        isUsernameFree: function (name, callback) {
+            socket.call('checkUsername', name)
+            .then(function (result) {
+                if (result.available) {
+                    callback(true);
+
+                } else {
+                    callback(false);
+                }
+            })
+            .catch(function (error) {
 
             });
         },

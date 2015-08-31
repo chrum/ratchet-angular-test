@@ -21,7 +21,7 @@ function (
     };
 
     $scope.sendMessage = function () {
-        if ($scope.data.currentMessage === '') {
+        if (!$scope.data || !$scope.data.currentMessage || $scope.data.currentMessage === '') {
             return;
         }
 

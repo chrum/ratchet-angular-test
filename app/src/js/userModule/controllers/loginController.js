@@ -2,23 +2,24 @@ angular
 .module('userModule')
 .controller('loginCtrl', [
     '$scope', '$state',
-    'userService',
+    'userService', 'socket',
 function (
     $scope, $state,
-    userService
+    userService, socket
 ) {
     $scope.data = {
         name: ''
     };
 
     $scope.login = function () {
-        if (isNameValid()) {
+        isNameValid(function () {
             userService.setUsername($scope.data.name);
             $state.go('home');
-        }
+
+        });
     };
 
-    function isNameValid() {
+    function isNameValid(onValid) {
         if ($scope.data.name === '') {
             alert('Nickname cannot be empty');
             return false;
@@ -26,12 +27,17 @@ function (
         } else if ($scope.data.name.length < 3) {
             alert('Nickname should be min 3 characters long');
             return false;
-        } else if (!userService.isUsernameFree($scope.data.name)) {
-            alert('Username taken, please choose different name');
-            return false;
         }
 
+        userService.isUsernameFree($scope.data.name, function (result) {
+            if (result) {
+                onValid();
 
-        return true;
+            } else {
+                alert('Username taken, please choose different name');
+
+            }
+        });
+
     }
 }]);
