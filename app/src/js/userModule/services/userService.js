@@ -21,7 +21,9 @@ function (
         },
 
         isUsernameFree: function (name, callback) {
-            socket.call('checkUsername', name)
+            socket.call('checkUsername', {
+                username: name
+            })
             .then(function (result) {
                 if (result.available) {
                     callback(true);
