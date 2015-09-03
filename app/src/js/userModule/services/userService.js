@@ -21,7 +21,7 @@ function (
         },
 
         isUsernameFree: function (name, callback) {
-            socket.call('checkUsername', {
+            socket.call('chat/checkUsername', {
                 username: name
             })
             .then(function (result) {
