@@ -11,6 +11,7 @@ function (
     $scope.counter = 0;
 
     $scope.messages = [];
+    $scope.users = ['me', 'you'];
 
     $scope.action = function () {
         $scope.counter++;

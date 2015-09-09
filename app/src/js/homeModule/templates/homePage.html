@@ -13,19 +13,29 @@
         <md-button href="#/login">Change username</md-button>
     </md-sidenav>
 
-    <md-content>
-        <md-list>
-            <md-list-item class="md-2-line" ng-repeat="message in messages">
-                <div class="md-list-item-text">
-                    <strong>{{message.name}}: </strong>{{message.text}}
-                </div>
-            </md-list-item>
-        </md-list>
+    <md-content flex="100">
+        <div layout="row">
+            <div layout="column" flex="60">
+                <md-list>
+                    <md-list-item class="md-2-line" ng-repeat="message in messages">
+                        <div class="md-list-item-text">
+                            <strong>{{message.name}}: </strong>{{message.text}}
+                        </div>
+                    </md-list-item>
+                </md-list>
 
-        <md-input-container>
-            <input ng-model="data.currentMessage"/>
-        </md-input-container>
-        <md-button
-                ng-click="sendMessage()">Send message</md-button>
+                <md-input-container>
+                    <input ng-model="data.currentMessage"/>
+                </md-input-container>
+                <md-button
+                    ng-click="sendMessage()">Send message</md-button>
+            </div>
+            <div layout="column" flex="40">
+                <strong>List of users</strong>
+                <p ng-repeat="name in users">
+                    {{name}}
+                </p>
+            </div>
+        </div>
     </md-content>
 </section>

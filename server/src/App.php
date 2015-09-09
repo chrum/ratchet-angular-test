@@ -55,12 +55,8 @@ class App implements WampServerInterface
     }
 
     public function onClose(Conn $conn) {
-        $this->fireEvent('onClose');
-        $client = $this->clients->offsetGet($conn);
-        $key = array_search($client->username, $this->names);
-        unset($this->names[$key]);
+        $this->fireEvent('onClose', $conn);
         $this->clients->detach($conn);
-
     }
 
     public function onSubscribe(Conn $conn, $topic) {
@@ -125,7 +121,7 @@ class App implements WampServerInterface
 
     public function addEventAction($event, $route)
     {
-
+        $this->onEventActions[$event][] = $route;
     }
 
     public function removeEventAction($event, $route)
@@ -133,11 +129,19 @@ class App implements WampServerInterface
 
     }
 
-    private function fireEvent($name)
+    private function fireEvent($name, $conn)
     {
         if (isset($this->onEventActions[$name])) {
             foreach ($this->onEventActions[$name] as $route) {
+                $this->executeRoute($route, [], $conn);
+            }
+        }
+    }
 
+    public function broadcast($topic, $data, Conn $exclude = null) {
+        foreach ($this->clients as $client) {
+            if ($client !== $exclude) {
+                $client->event($topic, $data);
             }
         }
     }

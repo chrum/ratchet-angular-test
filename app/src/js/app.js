@@ -9,8 +9,13 @@ angular
 ])
 .run([
     '$rootScope', '$location', '$state', '$timeout',
-function ($rootScope, $location, $state, $timeout) {
-    $timeout(function () {
+    'socket',
+function (
+    $rootScope, $location, $state, $timeout,
+    socket
+) {
+    $location.path('/');
+    socket.whenConnected(function () {
         $state.go('login');
     });
 }]);
