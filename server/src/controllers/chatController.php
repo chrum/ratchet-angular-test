@@ -25,20 +25,25 @@ class chatController
     public function actionCheckUsername(Conn $conn, $username)
     {
         $usernames = $this->getUsernames();
-        $clients = App::instance()->clients;
         if (in_array($username, $usernames)) {
             return ['available' => false];
         }
 
+        return ['available' => true];
+    }
+
+    public function actionRegisterUsername(Conn $conn, $username)
+    {
+        $clients = App::instance()->clients;
         $client = $clients->offsetGet($conn);
         $client->username = $username;
-        $usernames[] = $username;
-
         $clients->offsetSet($conn, $client);
-        App::instance()->setData('names', $usernames);
-        App::instance()->broadcast('chat/usersList', $usernames);
 
-        return ['available' => true];
+        $usernames = $this->getUsernames();
+        $usernames[] = $username;
+        App::instance()->setData('names', $usernames);
+
+        App::instance()->broadcast('chat/usersList', $usernames);
     }
 
     /**
@@ -52,8 +57,8 @@ class chatController
         $key = array_search($client->username, $usernames);
         unset($usernames[$key]);
 
+        App::instance()->setData('names', $usernames);
         App::instance()->broadcast('chat/usersList', $usernames);
-        $conn->event('chat/usersList', $usernames);
     }
 
     private function getUsernames()

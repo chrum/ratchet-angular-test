@@ -86,12 +86,17 @@ class App implements WampServerInterface
                     }
 
                 }
-                $result = call_user_func_array(array($controllerInstance, $action), $parameters);
-                if ($result === false) {
-                    return [true, 'Route '.$route.' found but there was problem with calling it'];
 
-                } else {
-                    return [false, $result];
+                try {
+                    $result = call_user_func_array(array($controllerInstance, $action), $parameters);
+                    if ($result === false) {
+                        return [true, 'Route '.$route.' found but there was problem with calling it'];
+
+                    } else {
+                        return [false, $result];
+                    }
+                } catch (Exception $e) {
+                    return [true, 'Route '.$route.' found but there was problem with calling it'];
                 }
 
 

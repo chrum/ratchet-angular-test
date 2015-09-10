@@ -4,7 +4,7 @@ angular
     'ngMaterial',
     'templatesModule',
     'userModule',
-    'homeModule',
+    'chatModule',
     'socketsModule'
 ])
 .run([

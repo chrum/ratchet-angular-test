@@ -2,10 +2,10 @@ angular
 .module('userModule')
 .controller('loginCtrl', [
     '$scope', '$state',
-    'userService', 'socket',
+    'userService',
 function (
     $scope, $state,
-    userService, socket
+    userService
 ) {
     $scope.data = {
         name: ''
@@ -14,7 +14,7 @@ function (
     $scope.login = function () {
         isNameValid(function () {
             userService.setUsername($scope.data.name);
-            $state.go('home');
+            $state.go('chat');
 
         });
     };

@@ -38,9 +38,6 @@ function (
         },
 
         init: function () {
-            socket.subscribe('chat/usersList', function () {
-                console.log('users list updated');
-            });
         }
     };
 

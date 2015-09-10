@@ -51,7 +51,11 @@ function ($rootScope, $timeout, $q) {
 
         subscribe: function (event, callback) {
             if (session) {
-                session.subscribe(event, callback);
+                session.subscribe(event, function (topic, data) {
+                    $rootScope.$apply(function () {
+                        callback(data);
+                    });
+                });
             }
         },
 

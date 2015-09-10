@@ -1,5 +1,10 @@
 <?php
 date_default_timezone_set('UTC');
+ini_set("log_errors", true);
+ini_set("error_reporting", E_ALL);
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+ini_set("error_log", "./error.log");
 /**
  *  This is...
  * php version 5.4

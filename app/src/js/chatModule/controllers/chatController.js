@@ -1,17 +1,19 @@
 angular
-.module('homeModule')
-.controller('homeCtrl', [
+.module('chatModule')
+.controller('chatCtrl', [
     '$scope', '$state', '$mdSidenav',
-    'userService',
+    'userService', 'chatService',
 function (
     $scope, $state, $mdSidenav,
-    userService
+    userService, chatService
 ) {
     $scope.username = userService.getUsername();
+    $scope.chatData = {
+        usersList: []
+    };
     $scope.counter = 0;
 
     $scope.messages = [];
-    $scope.users = ['me', 'you'];
 
     $scope.action = function () {
         $scope.counter++;
@@ -43,6 +45,8 @@ function (
             text: 'Hello ' + $scope.username
         });
 
+        chatService.registerUsername($scope.username);
+        $scope.chatData = chatService.getData();
     }
 
     init();
