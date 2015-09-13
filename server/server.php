@@ -16,7 +16,7 @@ use Ratchet\WebSocket\WsServer;
 
 use chrum\App;
 
-require dirname(__DIR__) . '/vendor/autoload.php';
+require dirname(__DIR__) . '/server/vendor/autoload.php';
 
 $server = IoServer::factory(
     new HttpServer(

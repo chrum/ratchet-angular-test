@@ -8,4 +8,5 @@ plugins/
 www/js/*
 www/css/*
 .idea
+error.log
 
