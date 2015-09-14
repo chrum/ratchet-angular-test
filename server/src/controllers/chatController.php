@@ -46,6 +46,16 @@ class chatController
         App::instance()->broadcast('chat/usersList', $usernames);
     }
 
+    public function actionSendMessage(Conn $conn, $message)
+    {
+        $clients = App::instance()->clients;
+        $client = $clients->offsetGet($conn);
+        App::instance()->broadcast('chat/newMessage', [
+            'username' => $client->username,
+            'text' => $message
+        ]);
+    }
+
     /**
      * On connection close lets remove username from the list
      * @param $conn

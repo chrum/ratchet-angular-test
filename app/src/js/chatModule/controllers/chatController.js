@@ -9,11 +9,11 @@ function (
 ) {
     $scope.username = userService.getUsername();
     $scope.chatData = {
-        usersList: []
+        username: null,
+        usersList: [],
+        messages: []
     };
     $scope.counter = 0;
-
-    $scope.messages = [];
 
     $scope.action = function () {
         $scope.counter++;
@@ -27,21 +27,13 @@ function (
         if (!$scope.data || !$scope.data.currentMessage || $scope.data.currentMessage === '') {
             return;
         }
-
-        $scope.messages.push({
-            name: $scope.username,
-            text: $scope.data.currentMessage
-        });
+        chatService.sendMessage($scope.data.currentMessage);
         $scope.data.currentMessage = '';
-
-        if ($scope.messages.length > 10) {
-            $scope.messages.shift();
-        }
     };
 
     function init() {
-        $scope.messages.push({
-            name: 'Bot',
+        $scope.chatData.messages.push({
+            username: 'Bot',
             text: 'Hello ' + $scope.username
         });
 

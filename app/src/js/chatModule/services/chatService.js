@@ -2,13 +2,15 @@ angular
 .module('chatModule')
 .factory('chatService', [
     '$rootScope',
-    'socket',
+    'socket', 'userService',
 function (
     $rootScope,
-    socket
+    socket, userService
 ) {
     var chatData = {
-        usersList: []
+        username: null,
+        usersList: [],
+        messages: []
     };
 
     var init = function () {
@@ -16,6 +18,11 @@ function (
             chatData.usersList = data;
             console.log('users list updated');
         });
+        socket.subscribe('chat/newMessage', function onNewMessage(data) {
+            chatData.messages.push(data);
+        });
+
+        chatData.username = userService.getUsername();
     };
 
     init();
@@ -27,6 +34,12 @@ function (
         registerUsername: function (name) {
             socket.call('chat/registerUsername', {
                 username: name
+            });
+        },
+
+        sendMessage: function (newMessage) {
+            socket.call('chat/sendMessage', {
+                message: newMessage
             });
         }
 

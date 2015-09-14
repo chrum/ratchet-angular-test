@@ -17,9 +17,9 @@
         <div layout="row">
             <div layout="column" flex="60">
                 <md-list>
-                    <md-list-item class="md-2-line" ng-repeat="message in messages">
+                    <md-list-item class="md-2-line" ng-repeat="message in chatData.messages">
                         <div class="md-list-item-text">
-                            <strong>{{message.name}}: </strong>{{message.text}}
+                            <strong>{{message.username}}: </strong>{{message.text}}
                         </div>
                     </md-list-item>
                 </md-list>
