@@ -37,20 +37,20 @@ class App implements WampServerInterface
     }
 
     public function onCall(Conn $conn, $id, $topic, array $params) {
-        $this->fireEvent('onBeforeCall');
+        $this->fireEvent('onBeforeCall', $conn);
         list($error, $data) = $this->executeRoute($topic->getId(), $params, $conn);
         if (!$error) {
-            $this->fireEvent('onAfterCall');
+            $this->fireEvent('onAfterCall', $conn);
             $conn->callResult($id, $data);
 
         } else {
-            $this->fireEvent('onErrorCall');
+            $this->fireEvent('onErrorCall', $conn);
             $conn->callError($id, $topic, $data);
         }
     }
 
     public function onOpen(Conn $conn) {
-        $this->fireEvent('onOpen');
+        $this->fireEvent('onOpen', $conn);
         $this->clients->attach($conn, new \stdClass());
     }
 
@@ -70,6 +70,9 @@ class App implements WampServerInterface
 
     private function executeRoute($route, $params, $conn = null)
     {
+        if (DEBUG) {
+            error_reporting(E_ALL);
+        }
         list($controller, $action) = explode('/', $route);
         $controller = 'chrum\\controllers\\'.$controller.'Controller';
         $action = 'action'.$action;
